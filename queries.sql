@@ -97,9 +97,9 @@ WHERE id > (SELECT id FROM horario WHERE periodo = '2m1')
   AND H.periodo LIKE '2%';
 
 ---------------------select p/ buscar horários---------------
-SELECT S.nome AS Sala, M.nome AS Materia, P.nome AS nome
-FROM sala S
-left outer join aula AS A ON (A.nome_sala = S.nome AND A.periodo = ?)
+SELECT S.nome AS Sala, A.periodo, M.nome AS Materia, P.nome AS nome 
+FROM sala S, aula A
+left outer join aula AS A ON (A.nome_sala = S.nome AND A.periodo like '%%')
 left outer join materia AS M ON (A.id_materia = M.id)
 left outer join professor AS P ON (P.id = M.professor_id)
-WHERE S.nome like ?;
+WHERE S.nome like 'E%';
